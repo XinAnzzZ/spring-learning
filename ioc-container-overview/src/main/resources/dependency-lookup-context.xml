@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="user" class="com.yuhangma.think.in.spring.ioc.overview.domain.User">
+        <property name="id" value="1"/>
+        <property name="name" value="Moore.Ma"/>
+    </bean>
+
+    <!--
+        1、当前 bean 会继承 parent 的属性
+        2、primary 标识当前这个 bean 是主要的。
+        当获取类型为 User 的 bean 时，由于上下文中有两个此类型的 bean，则会报错，而如果指定了主要的 bean，则只会获取到主要的这个 bean。
+    -->
+    <bean id="superUser" class="com.yuhangma.think.in.spring.ioc.overview.domain.SuperUser" parent="user"
+          primary="true">
+        <property name="age" value="18"/>
+    </bean>
+
+    <bean id="objectFactory" class="org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean">
+        <property name="targetBeanName" value="user"/>
+    </bean>
+</beans>
